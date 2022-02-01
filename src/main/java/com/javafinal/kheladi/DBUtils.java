@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class DBUtils {
 
 
     // static method to change scenes.
-    public static void changeScene(ActionEvent event , String fxmlFile, String title, String username, String type, ArrayList stocks){
+    public static void changeScene(ActionEvent event , String fxmlFile, String title, String username, String type, ArrayList stocks, ArrayList myStocks){
         Parent root = null;
 
         if(username !=null && type !=null){
@@ -138,7 +137,8 @@ alert.show();
                     String retrievedChannel = resultSet.getString("type");
                     if(retrievedPassword.equals(password)){
 
-                        changeScene(event, "logged-in.fxml","Welcome!", username, retrievedChannel,getStocks());
+
+                        changeScene(event, "logged-in.fxml","Welcome!", username, retrievedChannel,getStocks(),getMyStocks(username));
                     }else {
                         System.out.println("Passwords donot match!");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -189,7 +189,7 @@ alert.show();
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost/kheladi","root", "");
-            System.out.println("connected to database successfully");
+            System.out.println("Get Stocks entered");
             preparedStatement = connection.prepareStatement("SELECT * FROM stocks");
             resultSet = preparedStatement.executeQuery();
 
@@ -210,6 +210,88 @@ alert.show();
 
 
                 }
+                return stocks;
+            }
+
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            if (resultSet !=null){
+                try{
+                    resultSet.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+
+            if (preparedStatement !=null){
+                try{
+                    preparedStatement.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection !=null){
+                try{
+                    connection.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return stocks;
+    }
+
+    public static ArrayList<stockModel> getMyStocks(String username){
+//        ArrayList stocks = new ArrayList<String>();
+        ArrayList stocks = new ArrayList<stockModel>();
+        Connection connection = null;
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+             connection = DriverManager.getConnection("jdbc:mysql://localhost/kheladi","root", "");
+            System.out.println("Get my stocks entered");
+
+
+            preparedStatement = connection.prepareStatement("SELECT stocks from authentication WHERE username=?");
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+
+            if (!resultSet.isBeforeFirst()){
+                System.out.println("No stocks data found ");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("No Stock data found");
+                alert.show();
+            }else {
+
+                while (resultSet.next()){
+                    Object symbol = resultSet.getObject("stocks");
+
+                    System.out.println("Positions of my stocks");
+                    System.out.println(symbol);
+                    System.out.println(symbol.getClass());
+
+
+                }
+
+
+
+
+
+
+//                    String symbol = resultSet.getString("Symbol");
+//                    String name = resultSet.getString("Name");
+//                    int ltp = resultSet.getInt("LTP");
+//                    String sector = resultSet.getString("Type");
+//
+//                    stocks.add(new stockModel(symbol,name,ltp,sector));
+
+
                 return stocks;
             }
 

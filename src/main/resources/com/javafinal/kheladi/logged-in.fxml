@@ -31,7 +31,7 @@
                <padding>
                   <Insets bottom="5.0" top="5.0" />
                </padding></Button>
-            <Button fx:id="btn_my_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="My Stocks" textFill="WHITE">
+            <Button fx:id="btn_my_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="Stocks" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
@@ -119,17 +119,7 @@
                         <TableColumn fx:id="tbl_clm_ltp" prefWidth="51.4000244140625" text="LTP" />
                     </columns>
                   </TableView>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <TextField prefHeight="27.0" prefWidth="189.0" style="-fx-border-color: #1d0024;" />
-                        <ComboBox prefHeight="26.0" prefWidth="165.0" style="-fx-border-color: #1d0024;">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #102900;" text="Add Stock" textFill="WHITE" />
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" />
                </children>
                <StackPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

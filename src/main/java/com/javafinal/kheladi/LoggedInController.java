@@ -1,5 +1,5 @@
 package com.javafinal.kheladi;
-
+//imports
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,46 +25,22 @@ import java.util.ResourceBundle;
 public class LoggedInController implements Initializable {
 
     //panes and different sections of application
-    @FXML private Pane pn_compare_stocks;
-    @FXML private Pane pn_stock_news;
+    @FXML private Pane pn_compare_stocks,pn_stock_news,pn_sectorwise;
     @FXML private GridPane pn_my_stocks;
-    @FXML private Pane pn_sectorwise;
-    @FXML
-    private WebView myWebView;
+    @FXML private WebView myWebView;
     private WebEngine e;
-
-
-    // UI buttons and labels
+    //UI buttons and labels
     @FXML private Button button_logout;
-   @FXML private Label label_welcome;
-   @FXML private Label label_kheladi_type;
-   @FXML private Label label_location;
-   @FXML Label label_category;
-
-   //main side buttons
-   @FXML
-   private Button btn_nepse_live;
-   @FXML
-   private Button btn_sectorwise;
-   @FXML Button btn_my_stocks;
-   @FXML Button btn_compare_stocks;
-   @FXML Button btn_stock_news;
-
-   //tableview
+    @FXML private Label label_welcome, label_kheladi_type,label_location,label_category;
+    //main side buttons
+    @FXML private Button btn_nepse_live,btn_sectorwise,btn_my_stocks,btn_compare_stocks,btn_stock_news;
+    //tableview
     @FXML private TableView stocks_table;
-    @FXML private TableColumn tbl_clm_name;
-    @FXML private TableColumn tbl_clm_symbol;
-    @FXML private TableColumn tbl_clm_ltp;
-    @FXML private TableColumn tbl_clm_sector;
-
-
-
-
+    @FXML private TableColumn tbl_clm_name,tbl_clm_symbol,tbl_clm_ltp,tbl_clm_sector;
 
 
     @Override
-   public  void initialize(URL location, ResourceBundle resources){
-
+    public  void initialize(URL location, ResourceBundle resources){
         // intial Implementations
         e= myWebView.getEngine();
         e.load("https://www.nepsealpha.com/trading/chart");
@@ -74,19 +50,17 @@ public class LoggedInController implements Initializable {
         tbl_clm_sector.setCellValueFactory(new PropertyValueFactory<>("sector"));
 
 
-
-
-  // Logout button Action listner
-        button_logout.setOnAction(new EventHandler<ActionEvent>() {
+    // Logout button Action listner
+    button_logout.setOnAction(new EventHandler<ActionEvent>() {
                                       @Override
                                       public void handle(ActionEvent actionEvent) {
-                                          DBUtils.changeScene(actionEvent,"login-view.fxml","Login", null, null,null);
+                                          DBUtils.changeScene(actionEvent,"login-view.fxml","Login", null, null,null,null);
 
-                                      }
-                                  }
-                       );}
-    // handle clicks of category items
-@FXML
+                                      }});}
+
+
+        // handle clicks of category items
+    @FXML
     private void handleClicks (ActionEvent event){
         if(event.getSource()==btn_nepse_live){
             label_location.setText("/home/nepse_live");
@@ -115,8 +89,8 @@ public class LoggedInController implements Initializable {
         }
 }
 
-//mouse drag and mouse drag over for buttons
-@FXML private void mouseEnter (MouseEvent event){
+     //mouse drag and mouse drag over for buttons
+    @FXML private void mouseEnter (MouseEvent event){
          ((Button) event.getSource()).setStyle("-fx-background-color: #0055da;");
 
     }
