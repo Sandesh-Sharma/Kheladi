@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -79,11 +80,7 @@
       </Button>
       <StackPane layoutX="228.0" layoutY="123.0" prefHeight="337.0" prefWidth="470.0">
          <children>
-            <WebView fx:id="myWebView" prefHeight="364.0" prefWidth="470.0">
-               <StackPane.margin>
-                  <Insets />
-               </StackPane.margin></WebView>
-            <GridPane>
+            <GridPane fx:id="pn_my_stocks" prefHeight="338.0" prefWidth="382.0" style="-fx-background-color: white;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -92,7 +89,7 @@
                 <RowConstraints maxHeight="294.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <TableView prefHeight="287.0" prefWidth="451.0" GridPane.rowIndex="1">
                     <columns>
                       <TableColumn prefWidth="27.199996948242188" text="S.N" />
                       <TableColumn prefWidth="73.00001525878906" text="Script" />
@@ -104,12 +101,46 @@
                   </TableView>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField prefHeight="26.0" prefWidth="343.0" style="-fx-border-color: #1d0024;" />
-                        <Button mnemonicParsing="false" text="Add Stock" />
+                        <TextField prefHeight="27.0" prefWidth="189.0" style="-fx-border-color: #1d0024;" />
+                        <ComboBox prefHeight="26.0" prefWidth="165.0" style="-fx-border-color: #1d0024;">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #102900;" text="Add Stock" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin>
             </GridPane>
+            <Pane fx:id="pn_sectorwise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <children>
+                  <PieChart layoutX="39.0" layoutY="43.0" prefHeight="211.0" prefWidth="378.0" title="Sectorwise" />
+               </children>
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin></Pane>
+            <Pane fx:id="pn_compare_stocks" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <children>
+                  <Label text="Compare Stocks" />
+               </children>
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin></Pane>
+            <Pane fx:id="pn_stock_news" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <children>
+                  <Label fx:id="pn_news" text="News" />
+               </children>
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin>
+            </Pane>
+            <WebView fx:id="myWebView" prefHeight="364.0" prefWidth="470.0">
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin></WebView>
          </children>
       </StackPane>
       <Pane layoutX="227.0" layoutY="47.0" prefHeight="70.0" prefWidth="477.0" style="-fx-background-color: #102900;">

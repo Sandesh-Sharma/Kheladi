@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -18,15 +20,24 @@ import java.util.ResourceBundle;
 
 public class LoggedInController implements Initializable {
 
+    //panes and different sections of application
+    @FXML private Pane pn_compare_stocks;
+    @FXML private Pane pn_stock_news;
+    @FXML private GridPane pn_my_stocks;
+    @FXML private Pane pn_sectorwise;
     @FXML
-    private Button button_logout;
-   @FXML
-   private Label label_welcome;
-   @FXML
-   private Label label_kheladi_type;
-   @FXML
-   private Label label_location;
+    private WebView myWebView;
+    private WebEngine e;
+
+
+    // UI buttons and labels
+    @FXML private Button button_logout;
+   @FXML private Label label_welcome;
+   @FXML private Label label_kheladi_type;
+   @FXML private Label label_location;
    @FXML Label label_category;
+
+   //main side buttons
    @FXML
    private Button btn_nepse_live;
    @FXML
@@ -35,9 +46,7 @@ public class LoggedInController implements Initializable {
    @FXML Button btn_compare_stocks;
    @FXML Button btn_stock_news;
 
-   @FXML
-   private WebView myWebView;
-   private WebEngine e;
+
 
 
 
@@ -64,22 +73,27 @@ public class LoggedInController implements Initializable {
         if(event.getSource()==btn_nepse_live){
             label_location.setText("/home/nepse_live");
             label_category.setText("NEPSE LIVE");
+            myWebView.toFront();
         }
         else if(event.getSource()==btn_my_stocks){
             label_location.setText("/home/my_stocks");
             label_category.setText("MY STOCKS");
+            pn_my_stocks.toFront();
         }
         else if(event.getSource()==btn_compare_stocks){
             label_location.setText("/home/compare_stocks");
             label_category.setText("COMPARE STOCKS");
+            pn_compare_stocks.toFront();
         }
         else if(event.getSource()==btn_stock_news){
             label_location.setText("/home/stock_news");
             label_category.setText("STOCK_NEWS");
+            pn_stock_news.toFront();
         }
         else if(event.getSource()==btn_sectorwise){
             label_location.setText("/home/sectorwise");
             label_category.setText("SECTORWISE");
+            pn_sectorwise.toFront();
         }
 }
 
