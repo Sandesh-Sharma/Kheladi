@@ -45,6 +45,7 @@ public class MainController implements Initializable {
      public void handle(ActionEvent actionEvent) {
          System.out.println("Login Button Clicked!");
          DBUtils.logInUser(actionEvent, tf_username.getText(), tf_password.getText());
+         DBUtils.getStocks();
      }
  });
 
@@ -53,7 +54,7 @@ public class MainController implements Initializable {
  button_sign_up.setOnAction(new EventHandler<ActionEvent>() {
      @Override
      public void handle(ActionEvent actionEvent) {
-         DBUtils.changeScene(actionEvent,"sign-up.fxml","Signup!", null, null);
+         DBUtils.changeScene(actionEvent,"sign-up.fxml","Signup!", null, null, null);
      }
  });
 

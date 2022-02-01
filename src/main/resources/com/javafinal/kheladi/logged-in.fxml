@@ -80,41 +80,6 @@
       </Button>
       <StackPane layoutX="228.0" layoutY="123.0" prefHeight="337.0" prefWidth="470.0">
          <children>
-            <GridPane fx:id="pn_my_stocks" prefHeight="338.0" prefWidth="382.0" style="-fx-background-color: white;">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints maxHeight="161.4" minHeight="10.0" prefHeight="50.599999999999994" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="294.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TableView prefHeight="287.0" prefWidth="451.0" GridPane.rowIndex="1">
-                    <columns>
-                      <TableColumn prefWidth="27.199996948242188" text="S.N" />
-                      <TableColumn prefWidth="73.00001525878906" text="Script" />
-                        <TableColumn prefWidth="154.199951171875" text="Name" />
-                        <TableColumn prefWidth="63.4000244140625" text="Shares" />
-                        <TableColumn prefWidth="82.5999755859375" text="Bought At" />
-                        <TableColumn prefWidth="71.79998779296875" text="LTP" />
-                    </columns>
-                  </TableView>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <TextField prefHeight="27.0" prefWidth="189.0" style="-fx-border-color: #1d0024;" />
-                        <ComboBox prefHeight="26.0" prefWidth="165.0" style="-fx-border-color: #1d0024;">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #102900;" text="Add Stock" textFill="WHITE" />
-                     </children>
-                  </HBox>
-               </children>
-               <StackPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </StackPane.margin>
-            </GridPane>
             <Pane fx:id="pn_sectorwise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
                   <PieChart layoutX="39.0" layoutY="43.0" prefHeight="211.0" prefWidth="378.0" title="Sectorwise" />
@@ -137,6 +102,39 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </StackPane.margin>
             </Pane>
+            <GridPane fx:id="pn_my_stocks" prefHeight="338.0" prefWidth="382.0" style="-fx-background-color: white;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="161.4" minHeight="10.0" prefHeight="50.599999999999994" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="294.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TableView fx:id="stocks_table" prefHeight="287.0" prefWidth="451.0" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn fx:id="tbl_clm_symbol" prefWidth="59.19999772310257" text="Symbol" />
+                        <TableColumn fx:id="tbl_clm_name" prefWidth="159.40002059936523" text="Name" />
+                        <TableColumn fx:id="tbl_clm_sector" prefWidth="171.00001525878906" text="Sector" />
+                        <TableColumn fx:id="tbl_clm_ltp" prefWidth="51.4000244140625" text="LTP" />
+                    </columns>
+                  </TableView>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField prefHeight="27.0" prefWidth="189.0" style="-fx-border-color: #1d0024;" />
+                        <ComboBox prefHeight="26.0" prefWidth="165.0" style="-fx-border-color: #1d0024;">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #102900;" text="Add Stock" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin>
+            </GridPane>
             <WebView fx:id="myWebView" prefHeight="364.0" prefWidth="470.0">
                <StackPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

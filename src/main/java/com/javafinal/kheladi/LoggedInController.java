@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -16,6 +19,7 @@ import javafx.scene.web.WebView;
 
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoggedInController implements Initializable {
@@ -46,6 +50,12 @@ public class LoggedInController implements Initializable {
    @FXML Button btn_compare_stocks;
    @FXML Button btn_stock_news;
 
+   //tableview
+    @FXML private TableView stocks_table;
+    @FXML private TableColumn tbl_clm_name;
+    @FXML private TableColumn tbl_clm_symbol;
+    @FXML private TableColumn tbl_clm_ltp;
+    @FXML private TableColumn tbl_clm_sector;
 
 
 
@@ -54,15 +64,23 @@ public class LoggedInController implements Initializable {
 
     @Override
    public  void initialize(URL location, ResourceBundle resources){
+
+        // intial Implementations
         e= myWebView.getEngine();
         e.load("https://www.nepsealpha.com/trading/chart");
+        tbl_clm_symbol.setCellValueFactory(new PropertyValueFactory<>("symbol"));
+        tbl_clm_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbl_clm_ltp.setCellValueFactory(new PropertyValueFactory<>("ltp"));
+        tbl_clm_sector.setCellValueFactory(new PropertyValueFactory<>("sector"));
+
+
 
 
   // Logout button Action listner
         button_logout.setOnAction(new EventHandler<ActionEvent>() {
                                       @Override
                                       public void handle(ActionEvent actionEvent) {
-                                          DBUtils.changeScene(actionEvent,"login-view.fxml","Login", null, null);
+                                          DBUtils.changeScene(actionEvent,"login-view.fxml","Login", null, null,null);
 
                                       }
                                   }
@@ -111,9 +129,13 @@ public class LoggedInController implements Initializable {
 
 
    // Dashboard welcome and type label
-    public void setUserInformation(String username, String type){
+    public void setUserInformation(String username, String type, ArrayList stocks){
         label_welcome.setText("Welcome" + username + "!" );
         label_kheladi_type.setText("A "+ type);
+        for (int i=0; i<stocks.size();i++) {
+        stocks_table.getItems().add(stocks.get(i));
+        }
+
 
     }
 

@@ -1,7 +1,5 @@
 package com.javafinal.kheladi;
 import java.sql.*;
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,11 +9,15 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DBUtils {
 
+
     // static method to change scenes.
-    public static void changeScene(ActionEvent event , String fxmlFile, String title, String username, String type){
+    public static void changeScene(ActionEvent event , String fxmlFile, String title, String username, String type, ArrayList stocks){
         Parent root = null;
 
         if(username !=null && type !=null){
@@ -23,7 +25,7 @@ public class DBUtils {
                 FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root= loader.load();
                 LoggedInController loggedInController = loader.getController();
-                loggedInController.setUserInformation(username, type);
+                loggedInController.setUserInformation(username, type ,stocks);
 
             } catch (IOException e){
                 e.printStackTrace();
@@ -44,7 +46,7 @@ public class DBUtils {
 
 
     }
-
+    // user Signup
     public static void signUpUser(ActionEvent event, String username, String password, String type){
         Connection connection = null;
         PreparedStatement psInsert = null;
@@ -69,8 +71,10 @@ public class DBUtils {
                 psInsert.setString(2,password);
                 psInsert.setString(3,type);
                 psInsert.executeUpdate();
-
-                changeScene(event, "logged-in.fxml","Welcome",username,type);
+Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+alert.setContentText("Account Created Successfully!");
+alert.show();
+//                changeScene(event, "logged-in.fxml","Welcome",username,type);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -111,8 +115,7 @@ public class DBUtils {
         }
 
     }
-
-// user login
+    // user login
     public static void logInUser(ActionEvent event, String username, String password){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -134,7 +137,8 @@ public class DBUtils {
                     String retrievedPassword = resultSet.getString("password");
                     String retrievedChannel = resultSet.getString("type");
                     if(retrievedPassword.equals(password)){
-                        changeScene(event, "logged-in.fxml","Welcome!", username, retrievedChannel);
+
+                        changeScene(event, "logged-in.fxml","Welcome!", username, retrievedChannel,getStocks());
                     }else {
                         System.out.println("Passwords donot match!");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -175,6 +179,71 @@ public class DBUtils {
             }
 
         }
+    }
+    // return array of stock symbols from database
+    public static ArrayList<stockModel> getStocks(){
+//        ArrayList stocks = new ArrayList<String>();
+        ArrayList stocks = new ArrayList<stockModel>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/kheladi","root", "");
+            System.out.println("connected to database successfully");
+            preparedStatement = connection.prepareStatement("SELECT * FROM stocks");
+            resultSet = preparedStatement.executeQuery();
+
+            if (!resultSet.isBeforeFirst()){
+                System.out.println("No stocks data found ");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("No Stock data found");
+                alert.show();
+            }else {
+
+                while (resultSet.next()){
+                    String symbol = resultSet.getString("Symbol");
+                    String name = resultSet.getString("Name");
+                    int ltp = resultSet.getInt("LTP");
+                    String sector = resultSet.getString("Type");
+
+                    stocks.add(new stockModel(symbol,name,ltp,sector));
+
+
+                }
+                return stocks;
+            }
+
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            if (resultSet !=null){
+                try{
+                    resultSet.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+
+            if (preparedStatement !=null){
+                try{
+                    preparedStatement.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection !=null){
+                try{
+                    connection.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return stocks;
     }
 
 
