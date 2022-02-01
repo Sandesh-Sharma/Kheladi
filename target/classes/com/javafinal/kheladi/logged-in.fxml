@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafinal.kheladi.LoggedInController">
+   <children>
+      <Label fx:id="label_kheladi_type" layoutX="607.0" layoutY="4.0" text="Kheladi_ type" />
+      <VBox prefHeight="500.0" prefWidth="228.0" style="-fx-background-color: #001029;">
+<children>
+            <ImageView fitHeight="186.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
+
+            <image>
+               <Image url="@../../../kheladiIcon.png" />
+            </image>
+               <VBox.margin>
+                  <Insets bottom="40.0" left="10.0" right="10.0" top="30.0" />
+               </VBox.margin> </ImageView>
+            <Button fx:id="btn_nepse_live" graphicTextGap="10.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="228.0" style="-fx-background-color: #1d0024;" text="Nepse Live" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding></Button>
+            <Button fx:id="btn_my_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="My Stocks" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding></Button>
+            <Button fx:id="btn_compare_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="Compare Stocks" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding></Button>
+            <Button fx:id="btn_stock_news" graphicTextGap="10.0" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="Stock News" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding></Button>
+            <Button fx:id="btn_sectorwise" graphicTextGap="10.0" layoutX="10.0" layoutY="125.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="SectorWise" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding></Button>
+         </children></VBox>
+      <Label fx:id="label_welcome" layoutX="240.0" layoutY="4.0" text="Welcome" />
+      <Button fx:id="button_logout" layoutX="611.0" layoutY="461.0" mnemonicParsing="false" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" style="-fx-background-color: #001029;" text="Logout" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Button>
+      <StackPane layoutX="228.0" layoutY="123.0" prefHeight="337.0" prefWidth="470.0">
+         <children>
+            <WebView fx:id="myWebView" prefHeight="364.0" prefWidth="470.0">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin></WebView>
+         </children>
+      </StackPane>
+      <Pane layoutX="227.0" layoutY="47.0" prefHeight="70.0" prefWidth="477.0" style="-fx-background-color: #102900;">
+         <children>
+            <Label fx:id="label_location" layoutX="48.0" layoutY="6.0" text="home/nepse_live" textFill="WHITE" />
+            <Label fx:id="label_category" layoutX="48.0" layoutY="29.0" text="NEPSE LIVE" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

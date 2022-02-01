@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:controller="com.javafinal.kheladi.SignUpController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <AnchorPane prefHeight="500.0" prefWidth="273.0" style="-fx-background-color: #001029;">
+           <children>
+
+               <Label layoutX="22.0" layoutY="285.0" prefHeight="29.0" prefWidth="218.0" text="    Kheladi">
+                   <font>
+                       <Font name="Arial Black" size="34.0" />
+                   </font>
+                   <textFill>
+                       <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                               <Stop>
+                                   <color>
+                                       <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
+                                   </color>
+                               </Stop>
+                               <Stop offset="1.0">
+                                   <color>
+                                       <Color red="1.0" green="1.0" blue="1.0" />
+                                   </color>
+                               </Stop>
+                           </stops>
+                       </RadialGradient>
+                   </textFill>
+               </Label>
+               <Label layoutX="61.0" layoutY="344.0" text="The Ultimate NEPSE Application">
+                   <textFill>
+                       <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                               <Stop>
+                                   <color>
+                                       <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
+                                   </color>
+                               </Stop>
+                               <Stop offset="1.0">
+                                   <color>
+                                       <Color red="1.0" green="1.0" blue="1.0" />
+                                   </color>
+                               </Stop>
+                           </stops>
+                       </RadialGradient>
+                   </textFill>
+               </Label>
+               <ImageView fitHeight="150.0" fitWidth="218.0" layoutX="45.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@../../../kheladiIcon.png" />
+                   </image></ImageView>
+           </children>
+       </AnchorPane>
+      <AnchorPane prefHeight="500.0" prefWidth="441.0">
+         <children>
+            <Label layoutX="52.0" layoutY="77.0" text="Kheladi Name:" />
+            <Label layoutX="76.0" layoutY="120.0" text="Password:" />
+            <TextField fx:id="tf_username" layoutX="143.0" layoutY="73.0" />
+            <TextField fx:id="tf_password" layoutX="142.0" layoutY="116.0" />
+            <Label layoutX="190.0" layoutY="194.0" text="Kheladi Type?" />
+            <RadioButton fx:id="rb_trader" layoutX="167.0" layoutY="233.0" mnemonicParsing="false" text="Pro Trader" />
+            <RadioButton fx:id="rb_investor" layoutX="168.0" layoutY="269.0" mnemonicParsing="false" text="Mega Investor" />
+            <Button fx:id="button_sign_up" layoutX="154.0" layoutY="319.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #001029;" text="Signup" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="115.0" layoutY="391.0" text="Already a Kheladi? " />
+            <Button fx:id="button_login" layoutX="206.0" layoutY="377.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Login!">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+   </children>
+</HBox>
