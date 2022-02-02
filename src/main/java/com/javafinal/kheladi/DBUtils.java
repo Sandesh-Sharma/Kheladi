@@ -24,7 +24,7 @@ public class DBUtils {
                 FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root= loader.load();
                 LoggedInController loggedInController = loader.getController();
-                loggedInController.setUserInformation(username, type ,stocks);
+                loggedInController.setUserInformation(username, type ,stocks,myStocks);
 
             } catch (IOException e){
                 e.printStackTrace();
@@ -180,7 +180,7 @@ alert.show();
 
         }
     }
-    // return array of stock symbols from database
+    // returns a list of stockModel (all stocks available)
     public static ArrayList<stockModel> getStocks(){
 //        ArrayList stocks = new ArrayList<String>();
         ArrayList stocks = new ArrayList<stockModel>();
@@ -246,9 +246,11 @@ alert.show();
         return stocks;
     }
 
+
+    // returns a list of stockModel( only those stocks assigned to a username)
     public static ArrayList<stockModel> getMyStocks(String username){
 //        ArrayList stocks = new ArrayList<String>();
-        ArrayList stocks = new ArrayList<stockModel>();
+        ArrayList myStocks = new ArrayList<stockModel>();
         Connection connection = null;
 
         PreparedStatement preparedStatement = null;
@@ -271,28 +273,13 @@ alert.show();
 
                 while (resultSet.next()){
                     String symbol = resultSet.getString("Symbol");
+                    String name = resultSet.getString("Name");
+                    int ltp = resultSet.getInt("LTP");
+                    String sector = resultSet.getString("Type");
 
-                    System.out.println("Symbol of My stocks");
-                    System.out.println(symbol);
-
-
-
-                }
-
-
-
-
-
-
-//                    String symbol = resultSet.getString("Symbol");
-//                    String name = resultSet.getString("Name");
-//                    int ltp = resultSet.getInt("LTP");
-//                    String sector = resultSet.getString("Type");
-//
-//                    stocks.add(new stockModel(symbol,name,ltp,sector));
-
-
-                return stocks;
+                    myStocks.add(new stockModel(symbol,name,ltp,sector));
+     }
+ return myStocks;
             }
 
 
@@ -325,7 +312,7 @@ alert.show();
             }
 
         }
-        return stocks;
+        return myStocks;
     }
 
 

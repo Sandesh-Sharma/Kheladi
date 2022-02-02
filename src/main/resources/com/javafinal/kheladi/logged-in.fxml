@@ -31,7 +31,15 @@
                <padding>
                   <Insets bottom="5.0" top="5.0" />
                </padding></Button>
-            <Button fx:id="btn_my_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="Stocks" textFill="WHITE">
+            <Button fx:id="btn_stocks" graphicTextGap="10.0" layoutX="15.0" layoutY="274.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="All Stocks" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btn_my_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="My Stocks" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
@@ -82,7 +90,7 @@
          <children>
             <Pane fx:id="pn_sectorwise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
-                  <PieChart layoutX="39.0" layoutY="43.0" prefHeight="211.0" prefWidth="378.0" title="Sectorwise" />
+                  <PieChart fx:id="pieChart" layoutX="-3.0" layoutY="3.0" prefHeight="322.0" prefWidth="448.0" title="PieChart" />
                </children>
                <StackPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -102,6 +110,30 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </StackPane.margin>
             </Pane>
+            <GridPane fx:id="pn_stocks" layoutX="15.0" layoutY="15.0" prefHeight="338.0" prefWidth="382.0" style="-fx-background-color: white;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="161.4" minHeight="10.0" prefHeight="50.599999999999994" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="294.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TableView fx:id="stocks_table" prefHeight="287.0" prefWidth="451.0" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn fx:id="tbl_clm_symbol" prefWidth="59.19999772310257" text="Symbol" />
+                        <TableColumn fx:id="tbl_clm_name" prefWidth="159.40002059936523" text="Name" />
+                        <TableColumn fx:id="tbl_clm_sector" prefWidth="171.00001525878906" text="Sector" />
+                        <TableColumn fx:id="tbl_clm_ltp" prefWidth="51.4000244140625" text="LTP" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </GridPane>
+            <WebView fx:id="myWebView" prefHeight="364.0" prefWidth="470.0">
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin></WebView>
             <GridPane fx:id="pn_my_stocks" prefHeight="338.0" prefWidth="382.0" style="-fx-background-color: white;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -111,24 +143,24 @@
                 <RowConstraints maxHeight="294.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="stocks_table" prefHeight="287.0" prefWidth="451.0" GridPane.rowIndex="1">
+                  <TableView fx:id="stocks_table_my" prefHeight="287.0" prefWidth="451.0" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn fx:id="tbl_clm_symbol" prefWidth="59.19999772310257" text="Symbol" />
-                        <TableColumn fx:id="tbl_clm_name" prefWidth="159.40002059936523" text="Name" />
-                        <TableColumn fx:id="tbl_clm_sector" prefWidth="171.00001525878906" text="Sector" />
-                        <TableColumn fx:id="tbl_clm_ltp" prefWidth="51.4000244140625" text="LTP" />
+                      <TableColumn fx:id="tbl_clm_symbol_my" prefWidth="59.19999772310257" text="Symbol" />
+                        <TableColumn fx:id="tbl_clm_name_my" prefWidth="159.40002059936523" text="Name" />
+                        <TableColumn fx:id="tbl_clm_sector_my" prefWidth="171.00001525878906" text="Sector" />
+                        <TableColumn fx:id="tbl_clm_ltp_my" prefWidth="51.4000244140625" text="LTP" />
                     </columns>
                   </TableView>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox fx:id="combo_stocks" prefWidth="150.0" />
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Add to My Stocks" />
+                     </children></HBox>
                </children>
                <StackPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </StackPane.margin>
             </GridPane>
-            <WebView fx:id="myWebView" prefHeight="364.0" prefWidth="470.0">
-               <StackPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </StackPane.margin></WebView>
          </children>
       </StackPane>
       <Pane layoutX="227.0" layoutY="47.0" prefHeight="70.0" prefWidth="477.0" style="-fx-background-color: #102900;">

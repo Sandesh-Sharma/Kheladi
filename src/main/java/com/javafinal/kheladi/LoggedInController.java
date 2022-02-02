@@ -1,13 +1,16 @@
 package com.javafinal.kheladi;
 //imports
+import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Bounds;
+import javafx.geometry.Side;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -16,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.util.Duration;
 
 
 import java.net.URL;
@@ -24,19 +28,26 @@ import java.util.ResourceBundle;
 
 public class LoggedInController implements Initializable {
 
-    //panes and different sections of application
+    //Panes and different sections of application
     @FXML private Pane pn_compare_stocks,pn_stock_news,pn_sectorwise;
-    @FXML private GridPane pn_my_stocks;
+    @FXML private GridPane pn_my_stocks, pn_stocks;
     @FXML private WebView myWebView;
     private WebEngine e;
     //UI buttons and labels
     @FXML private Button button_logout;
     @FXML private Label label_welcome, label_kheladi_type,label_location,label_category;
-    //main side buttons
-    @FXML private Button btn_nepse_live,btn_sectorwise,btn_my_stocks,btn_compare_stocks,btn_stock_news;
-    //tableview
-    @FXML private TableView stocks_table;
-    @FXML private TableColumn tbl_clm_name,tbl_clm_symbol,tbl_clm_ltp,tbl_clm_sector;
+    //Main-Side buttons
+    @FXML private Button btn_nepse_live,btn_sectorwise,btn_my_stocks,btn_compare_stocks,btn_stock_news,btn_stocks;
+    //Tableview
+    @FXML private TableView stocks_table,stocks_table_my;
+    @FXML private TableColumn tbl_clm_name,tbl_clm_symbol,tbl_clm_ltp,tbl_clm_sector,tbl_clm_name_my,tbl_clm_symbol_my,tbl_clm_ltp_my,tbl_clm_sector_my;
+    //Pie-Chart
+    @FXML private PieChart pieChart;
+    //Combo-box
+    @FXML private ComboBox combo_stocks;
+
+
+
 
 
     @Override
@@ -48,6 +59,52 @@ public class LoggedInController implements Initializable {
         tbl_clm_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbl_clm_ltp.setCellValueFactory(new PropertyValueFactory<>("ltp"));
         tbl_clm_sector.setCellValueFactory(new PropertyValueFactory<>("sector"));
+        tbl_clm_symbol_my.setCellValueFactory(new PropertyValueFactory<>("symbol"));
+        tbl_clm_name_my.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbl_clm_ltp_my.setCellValueFactory(new PropertyValueFactory<>("ltp"));
+        tbl_clm_sector_my.setCellValueFactory(new PropertyValueFactory<>("sector"));
+
+
+//   piechart
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Microfinance",3),
+                new PieChart.Data("Hydro", 3),
+                new PieChart.Data("Commercial Bank", 4),
+                new PieChart.Data("DevelopmentBank",1)
+
+        );
+        pieChart.setData(pieChartData);
+
+//        pieChart.setTitle("Sectorwise Summary of your STOCKS");
+//        pieChart.setTitleSide(Side.BOTTOM);
+        pieChart.setLabelsVisible(true);
+        pieChart.setLabelsVisible(false);
+        pieChart.setLegendVisible(true);
+        pieChart.setLegendSide(Side.RIGHT);
+        pieChartData.stream().forEach(pieData -> {
+            pieData.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                Bounds b1 = pieData.getNode().getBoundsInLocal();
+                double newX = (b1.getWidth()) / 2 + b1.getMinX();
+                double newY = (b1.getHeight()) / 2 + b1.getMinY();
+                // Make sure pie wedge location is reset
+                pieData.getNode().setTranslateX(0);
+                pieData.getNode().setTranslateY(0);
+                TranslateTransition tt = new TranslateTransition(
+                        Duration.millis(1500), pieData.getNode());
+                tt.setByX(newX);
+                tt.setByY(newY);
+                tt.setAutoReverse(true);
+                tt.setCycleCount(2);
+                tt.play();
+            });
+        });
+
+
+
+
+
+
+
 
 
     // Logout button Action listner
@@ -84,9 +141,15 @@ public class LoggedInController implements Initializable {
         }
         else if(event.getSource()==btn_sectorwise){
             label_location.setText("/home/sectorwise");
-            label_category.setText("SECTORWISE");
+            label_category.setText("SECTORWISE SUMMARY");
             pn_sectorwise.toFront();
         }
+        else if(event.getSource()==btn_stocks){
+            label_location.setText("/home/stocks");
+            label_category.setText("STOCKS REGISTERED UNDER SEABON");
+            pn_stocks.toFront();
+        }
+
 }
 
      //mouse drag and mouse drag over for buttons
@@ -103,15 +166,33 @@ public class LoggedInController implements Initializable {
 
 
    // Dashboard welcome and type label
-    public void setUserInformation(String username, String type, ArrayList stocks){
+    public void setUserInformation(String username, String type, ArrayList<stockModel> stocks, ArrayList<stockModel> myStocks){
         label_welcome.setText("Welcome" + username + "!" );
         label_kheladi_type.setText("A "+ type);
         for (int i=0; i<stocks.size();i++) {
         stocks_table.getItems().add(stocks.get(i));
+
+
         }
+        for (int i=0; i<myStocks.size();i++) {
+            System.out.println(myStocks.get(i));
+            stocks_table_my.getItems().add(myStocks.get(i));
 
+}
 
-    }
+        // Find out remaining stock which is not in my stocks for adding it to combobox.
+        ArrayList<stockModel> tempStocks = stocks;
+        ArrayList<String> remainingStocksSymbol = new ArrayList();
+        for (stockModel s: myStocks
+             ) {
+            tempStocks.removeIf(t->(t.getSymbol().equals( s.getSymbol())));}
 
+        for (stockModel stock:tempStocks
+             ) {
 
+            remainingStocksSymbol.add(stock.getSymbol());
+
+        }
+        combo_stocks.setItems(FXCollections.observableArrayList(remainingStocksSymbol));
+}
 }
