@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="nepse">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/src/main/resources/packages/nepse.jar!/" />
+    </SOURCES>
+  </library>
+</component>

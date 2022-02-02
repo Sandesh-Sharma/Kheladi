@@ -1,5 +1,7 @@
 package com.javafinal.kheladi;
 //imports
+
+
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,17 +15,18 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
+import nepse.profitloss.ProfitLossCalculator;
+
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoggedInController implements Initializable {
@@ -45,6 +48,12 @@ public class LoggedInController implements Initializable {
     @FXML private PieChart pieChart;
     //Combo-box
     @FXML private ComboBox combo_stocks;
+    //Calulator page injections
+    @FXML private TextField tf_buy_rate,tf_sell_rate,tf_stock_quantity;
+    @FXML private Label lb_selling,lb_total_sell,lb_seabon_commission,lb_commisson,lb_db_charge,lb_capital,lb_net_receivable,lb_profit_loss;
+    @FXML private  ComboBox combo_capital_gain_tax,combo_sector;
+    @FXML private AnchorPane pn_profit_loss;
+    @FXML private VBox vbox_colour_change;
 
 
 
@@ -65,12 +74,26 @@ public class LoggedInController implements Initializable {
         tbl_clm_sector_my.setCellValueFactory(new PropertyValueFactory<>("sector"));
 
 
+        //calculator section
+       String[] capital_gain_array = new String[]{"7.5%","5%","10%"};
+
+        combo_capital_gain_tax.setItems(FXCollections.observableArrayList(capital_gain_array));
+
+        String[] sector_array = new String[]{"Combined","Mutual Fund","Corporate Debenture"};
+        combo_sector.setItems(FXCollections.observableArrayList(sector_array));
+
+
+
+
+
 //   piechart
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Microfinance",3),
                 new PieChart.Data("Hydro", 3),
                 new PieChart.Data("Commercial Bank", 4),
-                new PieChart.Data("DevelopmentBank",1)
+                new PieChart.Data("Life Insurance",1),
+                new PieChart.Data("Finance",1)
+
 
         );
         pieChart.setData(pieChartData);
@@ -135,8 +158,8 @@ public class LoggedInController implements Initializable {
             pn_compare_stocks.toFront();
         }
         else if(event.getSource()==btn_stock_news){
-            label_location.setText("/home/stock_news");
-            label_category.setText("STOCK_NEWS");
+            label_location.setText("/home/profit_loss_calculator");
+            label_category.setText("PROFIT/LOSS CALCULATOR");
             pn_stock_news.toFront();
         }
         else if(event.getSource()==btn_sectorwise){
@@ -166,7 +189,7 @@ public class LoggedInController implements Initializable {
 // Handle click of AddToMyStocks
    @FXML private void handleAddToMyStocks(ActionEvent event){
         String stockToBeAdded = combo_stocks.getValue().toString();
-      if  (DBUtils.addStock(stockToBeAdded,label_welcome.getText(),event,label_category.getText())) {
+      if  (DBUtils.addStock(stockToBeAdded,label_welcome.getText(),event,label_kheladi_type.getText())) {
           Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
           alert.setContentText("Added stock to the database.");
           alert.show();
@@ -177,6 +200,41 @@ public class LoggedInController implements Initializable {
       }
 
 
+    }
+
+
+    //calculate profit/loss
+    @FXML private void handleCalculate(){
+        ProfitLossCalculator profitLossCalculator = new ProfitLossCalculator(7,Double.parseDouble(tf_sell_rate.getText()),Double.parseDouble(tf_buy_rate.getText()), Integer.parseInt(tf_stock_quantity.getText()));
+        profitLossCalculator.calculateNetGain();
+
+        lb_capital.setText("Capital Gain Tax:  "+ profitLossCalculator.getCGT());
+        lb_commisson.setText("B.Commission:  "+ profitLossCalculator.calculateBrokerCommission());
+        lb_db_charge.setText("DP Charge:  "+profitLossCalculator.getDP_Charge());
+        lb_seabon_commission.setText("SEBON Commission:  "+profitLossCalculator.getSebon_fee());
+        lb_total_sell.setText("Total Sell Amount:  "+profitLossCalculator.getTotalSellAmount());
+        lb_selling.setText("Selling Price:  "+ profitLossCalculator.getSell_price());
+        lb_net_receivable.setText("Net Receivable Amount:  "+ profitLossCalculator.getNet_receivableAmount());
+
+
+        if (profitLossCalculator.calculateNetGain()<0){
+
+            pn_profit_loss.setStyle("-fx-background-color: red;");
+            lb_profit_loss.setText("LOSS :"+ profitLossCalculator.calculateNetGain());
+
+            vbox_colour_change.setStyle("-fx-border-color: red");
+
+        }
+        else if (profitLossCalculator.calculateNetGain()==0){
+            pn_profit_loss.setStyle("-fx-background-color: blue;");
+            lb_profit_loss.setText("NEUTRAL :"+ profitLossCalculator.calculateNetGain());
+            vbox_colour_change.setStyle("-fx-border-color: blue");
+        }
+        else {
+            pn_profit_loss.setStyle("-fx-background-color: green;");
+            lb_profit_loss.setText("PROFIT :"+ profitLossCalculator.calculateNetGain());
+            vbox_colour_change.setStyle("-fx-border-color: green");
+        }
     }
 
    // Dashboard welcome and type label

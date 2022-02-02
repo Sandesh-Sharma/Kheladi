@@ -10,7 +10,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.28.jar!/" />
@@ -39,5 +39,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-web:win:17.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:17.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:17.0.1" level="project" />
+    <orderEntry type="library" name="nepse (4)" level="project" />
   </component>
 </module>
