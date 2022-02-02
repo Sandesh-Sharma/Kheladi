@@ -315,7 +315,7 @@ alert.show();
         return myStocks;
     }
 
-    public static boolean addStock( String symbol, String username){
+    public static boolean addStock( String symbol, String username,ActionEvent event, String type){
         Connection connection = null;
 
         PreparedStatement preparedStatement = null;
@@ -329,6 +329,8 @@ alert.show();
             preparedStatement.setString(1, username);
             preparedStatement.setString(2,symbol);
             preparedStatement.executeUpdate();
+
+            changeScene(event,"logged-in.fxml","Welcome",username,type,getStocks(),getMyStocks(username));
             System.out.println("Updated successfully");
             return true;
  } catch (SQLException e){
