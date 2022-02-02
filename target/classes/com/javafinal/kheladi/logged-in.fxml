@@ -154,7 +154,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ComboBox fx:id="combo_stocks" prefWidth="150.0" />
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Add to My Stocks" />
+                        <Button fx:id="btn_add_to_my_stocks" mnemonicParsing="false" onAction="#handleAddToMyStocks" prefHeight="26.0" prefWidth="135.0" text="Add to My Stocks" />
                      </children></HBox>
                </children>
                <StackPane.margin>

@@ -163,11 +163,25 @@ public class LoggedInController implements Initializable {
     }
 
 
+// Handle click of AddToMyStocks
+   @FXML private void handleAddToMyStocks(ActionEvent event){
+        String stockToBeAdded = combo_stocks.getValue().toString();
+      if  (DBUtils.addStock(stockToBeAdded,label_welcome.getText())) {
+          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+          alert.setContentText("Added stock to the database.");
+          alert.show();
+      }else {
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setContentText("Sorry. Some problem occured. ");
+          alert.show();
+      }
 
+
+    }
 
    // Dashboard welcome and type label
     public void setUserInformation(String username, String type, ArrayList<stockModel> stocks, ArrayList<stockModel> myStocks){
-        label_welcome.setText("Welcome" + username + "!" );
+        label_welcome.setText(username);
         label_kheladi_type.setText("A "+ type);
         for (int i=0; i<stocks.size();i++) {
         stocks_table.getItems().add(stocks.get(i));

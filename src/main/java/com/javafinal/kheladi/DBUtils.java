@@ -315,6 +315,56 @@ alert.show();
         return myStocks;
     }
 
+    public static boolean addStock( String symbol, String username){
+        Connection connection = null;
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/kheladi","root", "");
+            System.out.println("Add stocks entered");
+
+
+            preparedStatement = connection.prepareStatement("UPDATE stocks SET usernames = concat(usernames,?) WHERE Symbol = ?");
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2,symbol);
+            preparedStatement.executeUpdate();
+            System.out.println("Updated successfully");
+            return true;
+ } catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            if (resultSet !=null){
+                try{
+                    resultSet.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+
+            if (preparedStatement !=null){
+                try{
+                    preparedStatement.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection !=null){
+                try{
+                    connection.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
+        return false;
+    }
+
 
 
 }
