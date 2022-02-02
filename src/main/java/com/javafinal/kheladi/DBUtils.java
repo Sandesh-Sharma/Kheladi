@@ -258,8 +258,8 @@ alert.show();
             System.out.println("Get my stocks entered");
 
 
-            preparedStatement = connection.prepareStatement("SELECT stocks from authentication WHERE username=?");
-            preparedStatement.setString(1,username);
+            preparedStatement = connection.prepareStatement("SELECT * from stocks WHERE usernames LIKE ?");
+            preparedStatement.setString(1, "%" + username+ "%");
             resultSet = preparedStatement.executeQuery();
 
             if (!resultSet.isBeforeFirst()){
@@ -270,11 +270,11 @@ alert.show();
             }else {
 
                 while (resultSet.next()){
-                    Object symbol = resultSet.getObject("stocks");
+                    String symbol = resultSet.getString("Symbol");
 
-                    System.out.println("Positions of my stocks");
+                    System.out.println("Symbol of My stocks");
                     System.out.println(symbol);
-                    System.out.println(symbol.getClass());
+
 
 
                 }
