@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<HBox fx:controller="com.javafinal.kheladi.SignUpController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafinal.kheladi.SignUpController">
    <children>
        <AnchorPane prefHeight="500.0" prefWidth="273.0" style="-fx-background-color: #001029;">
            <children>
@@ -60,22 +60,25 @@
          <children>
             <Label layoutX="52.0" layoutY="77.0" text="Kheladi Name:" />
             <Label layoutX="76.0" layoutY="120.0" text="Password:" />
-            <TextField fx:id="tf_username" layoutX="143.0" layoutY="73.0" />
-            <TextField fx:id="tf_password" layoutX="142.0" layoutY="116.0" />
-            <Label layoutX="190.0" layoutY="194.0" text="Kheladi Type?" />
-            <RadioButton fx:id="rb_trader" layoutX="167.0" layoutY="233.0" mnemonicParsing="false" text="Pro Trader" />
-            <RadioButton fx:id="rb_investor" layoutX="168.0" layoutY="269.0" mnemonicParsing="false" text="Mega Investor" />
-            <Button fx:id="button_sign_up" layoutX="154.0" layoutY="319.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #001029;" text="Signup" textFill="WHITE">
+            <TextField fx:id="tf_username" layoutX="143.0" layoutY="73.0" promptText="Kheladi Name" />
+            <Label layoutX="164.0" layoutY="174.0" text="Kheladi Type?">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font></Label>
+            <RadioButton fx:id="rb_trader" layoutX="144.0" layoutY="210.0" mnemonicParsing="false" text="Pro Trader" />
+            <RadioButton fx:id="rb_investor" layoutX="143.0" layoutY="250.0" mnemonicParsing="false" text="Mega Investor" />
+            <Button fx:id="button_sign_up" layoutX="146.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #001029;" text="Signup" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="115.0" layoutY="391.0" text="Already a Kheladi? " />
-            <Button fx:id="button_login" layoutX="206.0" layoutY="377.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Login!">
+            <Label layoutX="132.0" layoutY="379.0" text="Already a Kheladi? " />
+            <Button fx:id="button_login" layoutX="233.0" layoutY="374.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Login!">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
             </Button>
+            <PasswordField fx:id="tf_password" layoutX="144.0" layoutY="116.0" promptText="Password" />
          </children></AnchorPane>
    </children>
 </HBox>

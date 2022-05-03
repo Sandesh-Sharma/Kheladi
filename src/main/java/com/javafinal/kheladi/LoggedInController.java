@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Side;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoggedInController implements Initializable {
+
+    ArrayList<stockModel> allStocks;
 
     //Panes and different sections of application
     @FXML private Pane pn_compare_stocks,pn_stock_news,pn_sectorwise;
@@ -54,6 +56,10 @@ public class LoggedInController implements Initializable {
     @FXML private  ComboBox combo_capital_gain_tax,combo_sector;
     @FXML private AnchorPane pn_profit_loss;
     @FXML private VBox vbox_colour_change;
+
+    //lineGraph
+    @FXML private LineChart line_chart;
+    @FXML private ComboBox combo_company1, combo_company2;
 
 
 
@@ -123,7 +129,39 @@ public class LoggedInController implements Initializable {
         });
 
 
+// line-Chart
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Month");
 
+
+        line_chart.setTitle("Stock Monitoring, 2022");
+
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("NABIL");
+
+
+        series1.getData().add(new XYChart.Data("Jan", 23));
+        series1.getData().add(new XYChart.Data("Feb", 14));
+
+        series1.getData().add(new XYChart.Data("Sep", 43));
+        series1.getData().add(new XYChart.Data("Oct", 17));
+        series1.getData().add(new XYChart.Data("Nov", 29));
+        series1.getData().add(new XYChart.Data("Dec", 25));
+
+        XYChart.Series series2 = new XYChart.Series();
+        series2.setName("SWBBL");
+        series2.getData().add(new XYChart.Data("Jan", 33));
+        series2.getData().add(new XYChart.Data("Feb", 34));
+
+        series2.getData().add(new XYChart.Data("Sep", 48));
+        series2.getData().add(new XYChart.Data("Oct", 27));
+        series2.getData().add(new XYChart.Data("Nov", 37));
+        series2.getData().add(new XYChart.Data("Dec", 29));
+
+
+
+        line_chart.getData().addAll(series1, series2);
 
 
 
@@ -136,8 +174,37 @@ public class LoggedInController implements Initializable {
                                       public void handle(ActionEvent actionEvent) {
                                           DBUtils.changeScene(actionEvent,"login-view.fxml","Login", null, null,null,null);
 
+
                                       }});}
 
+    //After first company is choosen in the combo box.
+    @FXML
+    private void firstCompanyChoosen (){
+
+        if (combo_company1.getValue() != null){
+            ArrayList<stockModel> tempStocks= allStocks;
+            ArrayList<String> remainingStocksSymbol= new ArrayList<>();
+            combo_company2.setDisable(false);
+
+            for (stockModel s: allStocks
+            ) {
+                tempStocks.removeIf(t->(t.getSymbol().equals( combo_company1.getValue().toString())));}
+
+            for (stockModel stock:tempStocks
+            ) {
+
+                remainingStocksSymbol.add(stock.getSymbol());
+
+            }
+            combo_company1.setItems(FXCollections.observableArrayList(remainingStocksSymbol));
+
+        }
+
+
+
+
+
+    }
 
         // handle clicks of category items
     @FXML
@@ -202,6 +269,11 @@ public class LoggedInController implements Initializable {
 
     }
 
+    @FXML private void handleCompare(){
+
+
+    }
+
 
     //calculate profit/loss
     @FXML private void handleCalculate(){
@@ -239,6 +311,7 @@ public class LoggedInController implements Initializable {
 
    // Dashboard welcome and type label
     public void setUserInformation(String username, String type, ArrayList<stockModel> stocks, ArrayList<stockModel> myStocks){
+        allStocks = stocks;
         label_welcome.setText(username);
         label_kheladi_type.setText(type);
         for (int i=0; i<stocks.size();i++) {
@@ -255,6 +328,7 @@ public class LoggedInController implements Initializable {
         // Find out remaining stock which is not in my stocks for adding it to combobox.
         ArrayList<stockModel> tempStocks = stocks;
         ArrayList<String> remainingStocksSymbol = new ArrayList();
+        ArrayList<String> allStocksSymbol = new ArrayList<>();
         for (stockModel s: myStocks
              ) {
             tempStocks.removeIf(t->(t.getSymbol().equals( s.getSymbol())));}
@@ -265,6 +339,16 @@ public class LoggedInController implements Initializable {
             remainingStocksSymbol.add(stock.getSymbol());
 
         }
+        for (stockModel stock:stocks
+        ) {
+
+            allStocksSymbol.add(stock.getSymbol());
+
+        }
         combo_stocks.setItems(FXCollections.observableArrayList(remainingStocksSymbol));
+        combo_company1.setItems(FXCollections.observableArrayList(allStocksSymbol));
+
+
+
 }
 }

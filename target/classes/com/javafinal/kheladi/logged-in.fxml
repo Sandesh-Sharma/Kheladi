@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafinal.kheladi.LoggedInController">
    <children>
-      <Label fx:id="label_kheladi_type" layoutX="316.0" layoutY="4.0" text="Kheladi_ type" />
+      <Label fx:id="label_kheladi_type" layoutX="316.0" layoutY="4.0" text="Kheladi_ type" underline="true" />
       <VBox prefHeight="500.0" prefWidth="228.0" style="-fx-background-color: #001029;">
 <children>
             <ImageView fitHeight="186.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
@@ -27,17 +27,11 @@
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding></Button>
+               </VBox.margin></Button>
             <Button fx:id="btn_stocks" graphicTextGap="10.0" layoutX="15.0" layoutY="274.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="All Stocks" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding>
             </Button>
             <Button fx:id="btn_my_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="My Stocks" textFill="WHITE">
                <font>
@@ -45,42 +39,38 @@
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding></Button>
+               </VBox.margin></Button>
             <Button fx:id="btn_compare_stocks" graphicTextGap="10.0" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="Compare Stocks" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding></Button>
+               </VBox.margin></Button>
             <Button fx:id="btn_sectorwise" graphicTextGap="10.0" layoutX="10.0" layoutY="125.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="SectorWise" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding></Button>
+               </VBox.margin></Button>
             <Button fx:id="btn_stock_news" graphicTextGap="10.0" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="Profit/Loss Calculator" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding></Button>
+               </VBox.margin></Button>
+            <Button fx:id="btn_stock_news1" graphicTextGap="10.0" layoutX="15.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleClicks" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" prefHeight="38.0" prefWidth="230.0" style="-fx-background-color: #1d0024;" text="Nepse News" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Button>
          </children></VBox>
-      <Label fx:id="label_welcome" layoutX="240.0" layoutY="4.0" text="Welcome" />
+      <Label fx:id="label_welcome" layoutX="240.0" layoutY="4.0" style="-fx-border-color: #102900;" text="Welcome">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font></Label>
       <Button fx:id="button_logout" layoutX="623.0" layoutY="8.0" mnemonicParsing="false" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" style="-fx-background-color: #001029;" text="Logout" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
@@ -91,13 +81,6 @@
             <Pane fx:id="pn_sectorwise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
                   <PieChart fx:id="pieChart" layoutX="-3.0" layoutY="3.0" prefHeight="322.0" prefWidth="448.0" title="PieChart" />
-               </children>
-               <StackPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </StackPane.margin></Pane>
-            <Pane fx:id="pn_compare_stocks" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
-               <children>
-                  <Label text="Compare Stocks" />
                </children>
                <StackPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -296,6 +279,37 @@
                   </VBox>
                </children>
             </Pane>
+            <Pane fx:id="pn_compare_stocks" prefHeight="352.0" prefWidth="461.0" style="-fx-background-color: white;">
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin>
+               <children>
+                  <LineChart fx:id="line_chart" layoutX="1.0" layoutY="62.0" prefHeight="273.0" prefWidth="461.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <HBox alignment="CENTER" layoutY="12.0" prefHeight="46.0" prefWidth="460.0">
+                     <children>
+                        <ComboBox fx:id="combo_company1" onAction="#firstCompanyChoosen" prefHeight="26.0" prefWidth="139.0" promptText="Choose first stock" style="-fx-border-color: #102900;" />
+                        <Button fx:id="btn_compare" mnemonicParsing="false" onAction="#handleCompare" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" style="-fx-background-color: #102900;" text="Compare Now" textFill="WHITE">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <ComboBox fx:id="combo_company2" disable="true" prefHeight="26.0" prefWidth="139.0" promptText="Choose second stock" style="-fx-border-color: #102900;" />
+                     </children>
+                  </HBox>
+               </children></Pane>
             <WebView fx:id="myWebView" prefHeight="364.0" prefWidth="470.0">
                <StackPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

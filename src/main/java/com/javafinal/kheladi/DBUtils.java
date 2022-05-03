@@ -205,8 +205,9 @@ alert.show();
                     String name = resultSet.getString("Name");
                     int ltp = resultSet.getInt("LTP");
                     String sector = resultSet.getString("Type");
+                    String priceChange = resultSet.getString("priceChange");
 
-                    stocks.add(new stockModel(symbol,name,ltp,sector));
+                    stocks.add(new stockModel(symbol,name,ltp,sector,priceChange));
 
 
                 }
@@ -276,8 +277,9 @@ alert.show();
                     String name = resultSet.getString("Name");
                     int ltp = resultSet.getInt("LTP");
                     String sector = resultSet.getString("Type");
+                    String priceChange= resultSet.getString("priceChange");
 
-                    myStocks.add(new stockModel(symbol,name,ltp,sector));
+                    myStocks.add(new stockModel(symbol,name,ltp,sector,priceChange));
      }
  return myStocks;
             }
